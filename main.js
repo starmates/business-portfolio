@@ -365,9 +365,42 @@
     const bad = letterFields.filter((el) => !checkField(el));
     if (bad.length) { bad[0].focus(); letterStatus.textContent = 'A couple of blanks are still empty. Fill in the marked ones and send again.'; return; }
     const d = Object.fromEntries(new FormData(letter).entries());
-    const body = [`Hey, my name is ${d.name} and I run ${d.business}.`, d.website ? `You can see us at ${d.website}.` : '', `What I need most is ${d.need}.`, `Here's what isn't working yet:\n${d.message}`, `I'd like to start ${d.when}.`, `You can reach me at ${d.email}.`].filter(Boolean).join('\n\n');
-    location.href = `mailto:aabid@starleddisplay.com?subject=${encodeURIComponent(`Project enquiry from ${d.business}`)}&body=${encodeURIComponent(body)}`;
-    letterStatus.textContent = 'Your email app should open with this filled in. Press send there and it reaches us.';
+    if (d.botcheck) return;
+    const sendButton = letter.querySelector('button[type="submit"]');
+    sendButton.disabled = true;
+    sendButton.textContent = 'Sending...';
+    letterStatus.textContent = '';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: '86e80733-6990-4335-bae4-5f2d33c8e4c1',
+        subject: `Project enquiry from ${d.business}`,
+        from_name: d.name,
+        replyto: d.email,
+        Name: d.name,
+        Business: d.business,
+        Website: d.website || 'Not given',
+        'Needs most': d.need,
+        'Not working yet': d.message,
+        'Wants to start': d.when,
+        Email: d.email,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.success) throw new Error(data.message);
+        letter.reset();
+        letterFields.forEach((el) => el.removeAttribute('aria-invalid'));
+        letterStatus.textContent = 'Got it, thank you. We will read this and get back to you.';
+      })
+      .catch(() => {
+        letterStatus.textContent = 'That did not send. Please try again, or call us on +971 50 281 4612.';
+      })
+      .finally(() => {
+        sendButton.disabled = false;
+        sendButton.textContent = 'Send project details';
+      });
   });
 
   // Services: the word melts from one service into the next, only while on screen
@@ -384,7 +417,7 @@
     const show = (el, f) => {
       if (f <= 0) { el.style.opacity = 0; el.style.filter = ''; return; }
       el.style.opacity = Math.pow(f, 0.4);
-      el.style.filter = f >= 1 ? '' : `blur(${Math.min(8 / f - 8, 40).toFixed(2)}px)`;
+      el.style.filter = f >= 1 ? '' : `blur(${Math.min(2.5 / f - 2.5, 10).toFixed(2)}px)`;
     };
     wordB.textContent = words[1];
     show(wordB, 0);

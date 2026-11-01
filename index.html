@@ -376,7 +376,7 @@
 <section class="services" id="services">
   <h2 class="title" data-lines><span class="line"><span>Need one thing fixed,</span></span> <span class="line"><span>or the whole path?</span></span></h2>
   <p class="svc-morph"><span class="sr-only">Start with your website, your SEO or your ads.</span><span aria-hidden="true">Start with your <span class="morph" id="morph"><span class="morph-size">website</span><span class="morph-word" id="morph-a">website</span><span class="morph-word" id="morph-b"></span></span></span></p>
-  <svg class="morph-defs" aria-hidden="true" width="0" height="0"><filter id="morph-threshold"><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 255 -140"/></filter></svg>
+  <svg class="morph-defs" aria-hidden="true" width="0" height="0"><filter id="morph-threshold"><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 12 -2"/></filter></svg>
   <div class="svc-layout">
     <div class="svc-side">
       <p class="svc-intro">Plenty of businesses need all of it. Some only need one piece. We'll tell you which is which.</p>
@@ -413,8 +413,9 @@
     <p><a class="text-link" href="tel:+971502814612">+971 50 281 4612</a></p>
   </div>
   <form class="letter" id="letter" novalidate>
-    <p>Hey, my name is <input id="l-name" name="name" aria-label="Your name" placeholder="Your name" autocomplete="name" required size="12"> and I run <input id="l-business" name="business" aria-label="Your business" placeholder="Your business" autocomplete="organization" required size="14">.</p>
-    <p>You can see us at <input id="l-site" name="website" aria-label="Your website, if you have one" placeholder="Your website, if you have one" inputmode="url" autocomplete="url" size="26">.</p>
+    <input class="sr-only" type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p>Hey, my name is <input id="l-name" name="name" aria-label="Your name" placeholder="Your name" autocomplete="name" required size="12"> and I run <input id="l-business" name="business" aria-label="Your business" placeholder="Your business" autocomplete="organization" required size="14"><span class="l-dot">.</span></p>
+    <p>You can see us at <input id="l-site" name="website" aria-label="Your website, if you have one" placeholder="Your website, if you have one" inputmode="url" autocomplete="url" size="26"><span class="l-dot">.</span></p>
     <p>What I need most is <select id="l-need" name="need" aria-label="What you need most" required>
       <option value="" selected disabled>Choose one</option>
       <option>a new website</option>
@@ -431,7 +432,7 @@
       <option>next month</option>
       <option>whenever you have room</option>
     </select></p>
-    <p>You can reach me at <input id="l-email" name="email" type="email" aria-label="Your email" placeholder="Your email" autocomplete="email" required size="18">.</p>
+    <p>You can reach me at <input id="l-email" name="email" type="email" aria-label="Your email" placeholder="Your email" autocomplete="email" required size="18"><span class="l-dot">.</span></p>
     <div class="letter-end">
       <button class="button" type="submit">Send project details</button>
       <p class="letter-note">By sending this you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>

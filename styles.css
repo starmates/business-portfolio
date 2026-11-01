@@ -419,3 +419,16 @@ html:not(.explore-pin) .slide-frame { width: min(58vw, 44dvh, 340px); }
   .fix-compare span::before { content: ""; }
   .fix-note { display: none; }
 }
+
+/* Phones and tablets: spacing and tap-size fixes from the responsive audit */
+@media (max-width: 900px) {
+  .work-intro { display: flex; flex-direction: column; justify-content: center; padding-block: 72px; }
+}
+@media (max-width: 800px) {
+  .l-dot { display: none; }
+  .letter input, .letter select { min-height: 44px; }
+  .letter-note a { display: inline-block; padding-block: 8px; }
+  .fix-compare input { height: 36px; }
+}
+.letter input.sr-only { width: 1px; min-height: 0; height: 1px; padding: 0; margin: 0; }
+.letter-status:not(:empty) { padding-top: 4px; color: var(--text); }
